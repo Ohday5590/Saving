@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>ກະປຸກເກັບເງີນ ໂອເດ</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600&family=Kanit:wght@300;600;700&display=swap');
+
+:root {
+  --accent:#f4845f; --accent-deep:#e05c35; --accent-soft:#fff0eb; --accent-glow:rgba(244,132,95,.35);
+  --bg:#fdf6ed; --bg2:#f5ede0; --bg3:#ede0ce;
+  --card:#ffffff; --card2:#f8f2ea; --border:rgba(26,18,8,.08); --shadow:0 2px 14px rgba(26,18,8,.09);
+  --text:#1a1208; --text2:#7a6a55; --text3:#b8a896;
+  --kip:#e07b39; --kip-bg:#fff4ed; --baht:#1a6fb5; --baht-bg:#edf4ff;
+  --teal:#2d9c8e; --teal-lt:#e6f5f3; --red:#e74c3c; --green:#27ae60;
+  --radius:20px; --radius-sm:12px;
+}
+.dark,
+body.dark,
+body.dark .sheet,
+body.dark .overlay,
+body.dark #splashScreen {
+  --bg:#141210; --bg2:#1c1916; --bg3:#252118; --card:#1e1b16; --card2:#252118;
+  --border:rgba(255,255,255,.07); --shadow:0 2px 14px rgba(0,0,0,.35);
+  --text:#f0ece6; --text2:#a09080; --text3:#5a5048;
+  --kip-bg:#2a1e12; --baht-bg:#101c2a; --teal-lt:#0e2420; --accent-soft:#2a1810;
+}
+body.dark { background: #141210 !important; }
+body.dark .sheet { background: #1e1b16 !important; }
+body.dark .form-input { background: #1c1916 !important; color: #f0ece6 !important; border-color: rgba(255,255,255,.1) !important; }
+body.dark .form-input::placeholder { color: #5a5048 !important; }
+body.dark .inp-kip { background: #2a1e12 !important; }
+body.dark .inp-baht { background: #101c2a !important; }
+body.dark .btn-danger { background: #2a1010 !important; }
+body.dark .dark-row { background: #252118 !important; }
+body.dark .lang-btn:not(.sel), body.dark .src-btn:not(.sel) { background: #252118 !important; color: #f0ece6 !important; border-color: rgba(255,255,255,.07) !important; }
+body.dark .txn-cb.kip:not(.sel) { border-color: rgba(224,123,57,.3) !important; }
+body.dark .txn-cb.baht:not(.sel) { border-color: rgba(26,111,181,.3) !important; }
+body.dark .btn-secondary { color: #a09080 !important; border-color: rgba(255,255,255,.1) !important; }
+body.dark .gp-box { background: #252118 !important; }
+body.dark .hist-del { background: #2a1010 !important; }
+body.dark .icon-btn { background: #1e1b16 !important; border-color: rgba(255,255,255,.07) !important; }
+body.dark .mini-btn { background: #252118 !important; border-color: rgba(255,255,255,.07) !important; }
+body.dark .file-input-wrapper { background: #1c1916 !important; border-color: rgba(255,255,255,.12) !important; }
+body.dark .emoji-chip { background: #252118 !important; }
+body.dark .emoji-chip.sel { background: #2a1810 !important; }
+body.dark .sheet-title { color: #f0ece6 !important; }
+body.dark .s-title { color: #5a5048 !important; }
+body.dark .dark-lbl { color: #f0ece6 !important; }
+body.dark .form-label { color: #a09080 !important; }
+.theme-orange { --accent:#f4845f; --accent-deep:#e05c35; --accent-soft:#fff0eb; --accent-glow:rgba(244,132,95,.35); }
+.theme-rose   { --accent:#f43f5e; --accent-deep:#e11d48; --accent-soft:#fff0f3; --accent-glow:rgba(244,63,94,.35); }
+.theme-purple { --accent:#8b5cf6; --accent-deep:#6d28d9; --accent-soft:#f3eeff; --accent-glow:rgba(139,92,246,.35); }
+.theme-blue   { --accent:#3b82f6; --accent-deep:#1d4ed8; --accent-soft:#eff6ff; --accent-glow:rgba(59,130,246,.35); }
+.theme-teal   { --accent:#0d9488; --accent-deep:#0a7a6f; --accent-soft:#e6faf8; --accent-glow:rgba(13,148,136,.35); }
+.theme-green  { --accent:#22c55e; --accent-deep:#16a34a; --accent-soft:#f0fdf4; --accent-glow:rgba(34,197,94,.35); }
+
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;overflow:hidden;}
+body{background:var(--bg);color:var(--text);font-family:'Mitr',sans-serif;transition:background .35s,color .35s;}
+
+.app{display:flex;flex-direction:column;height:100vh;max-width:430px;margin:0 auto;background:var(--bg);position:relative;transition:background .35s;overflow:hidden;}
+
+/* HEADER & STICKY MECHANISM */
+.header{padding:52px 20px 12px;flex-shrink:0;background:var(--bg);transition:all 0.3s ease;z-index:100;}
+.header-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;transition:all 0.3s ease;}
+.app-title-container { display: flex; flex-direction: column; }
+.app-title{font-family:'Kanit',sans-serif;font-size:26px;font-weight:700;color:var(--text);line-height:1.2;}
+.app-title span{color:var(--accent);}
+.sys-time { font-size: 13px; color: var(--text2); font-weight: 500; font-family: 'Kanit', sans-serif; letter-spacing: 0.5px;}
+
+.hdr-btns{display:flex;gap:7px;}
+.icon-btn{width:38px;height:38px;border-radius:11px;background:var(--card);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;transition:all .2s;box-shadow:var(--shadow);}
+.icon-btn:active{transform:scale(.9);}
+
+/* SUMMARY CARD WITH MINI TRANSITION */
+.summary-card{background:var(--accent);border-radius:var(--radius);padding:18px 20px;position:relative;overflow:hidden;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);box-shadow: var(--shadow);}
+.summary-card::after{content:'💵';position:absolute;right:18px;bottom:-10px;font-size:78px;opacity:.14;transform:scaleX(-1);pointer-events:none;transition:all 0.3s;}
+.sum-label{font-size:11px;color:rgba(255,255,255,.7);letter-spacing:.5px;margin-bottom:10px;transition:all 0.3s;}
+.sum-row{display:flex;gap:20px;align-items:flex-end;margin-bottom:12px;transition:all 0.3s;}
+.sum-cur{font-size:11px;color:rgba(255,255,255,.65);margin-bottom:1px;transition:all 0.3s;}
+.sum-amt{font-family:'Kanit',sans-serif;font-size:26px;font-weight:700;color:#fff;line-height:1;transition:all 0.3s;}
+.sum-div{width:1px;background:rgba(255,255,255,.25);align-self:stretch;margin-bottom:2px;transition:all 0.3s;}
+.sum-stats{display:flex;gap:10px;transition:all 0.3s;}
+.stat-pill{background:rgba(255,255,255,.18);border-radius:20px;padding:4px 11px;font-size:12px;color:#fff;transition:all 0.3s;}
+
+/* SCROLLED HEADER STATE (MINI UI) */
+.header.scrolled {padding-top: 15px; padding-bottom: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);}
+.dark .header.scrolled {box-shadow: 0 4px 12px rgba(0,0,0,0.2);}
+.header.scrolled .header-row {margin-bottom: 8px; display: none;}
+.header.scrolled .summary-card {padding: 10px 16px; border-radius: 14px;}
+.header.scrolled .summary-card::after {font-size: 40px; right: 10px; bottom: -5px;}
+.header.scrolled .sum-label {display: none;}
+.header.scrolled .sum-row {margin-bottom: 0; gap: 12px; justify-content: center;}
+.header.scrolled .sum-amt {font-size: 18px;}
+.header.scrolled .sum-cur {font-size: 9px; display: inline; margin-right: 3px;}
+.header.scrolled .sum-stats {display: none;}
+
+/* SCROLL AREA */
+.scroll-area{flex:1;overflow-y:auto;padding:4px 16px 110px;-webkit-overflow-scrolling:touch;}
+.scroll-area::-webkit-scrollbar{display:none;}
+.sec-lbl{font-size:11px;font-weight:600;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin:12px 4px 10px;}
+
+/* GOAL CARD */
+.goal-card{background:var(--card);border-radius:var(--radius);padding:16px 16px 13px;margin-bottom:11px;box-shadow:var(--shadow);border:1.5px solid var(--border);position:relative;overflow:hidden;animation:slideUp .3s ease both;transition:background .35s,border-color .3s;}
+.goal-card.done{border-color:var(--teal);}
+.goal-stripe{position:absolute;left:0;top:0;bottom:0;width:4px;border-radius:4px 0 0 4px;transition:background .5s;}
+@keyframes slideUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.goal-top{display:flex;align-items:flex-start;gap:11px;margin-bottom:12px;}
+.goal-ico{width:44px;height:44px;border-radius:13px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;transition:background .35s;overflow:hidden;}
+.goal-ico img{width:100%;height:100%;object-fit:cover;}
+.goal-card.done .goal-ico{background:var(--teal-lt);}
+.goal-meta{flex:1;min-width:0;}
+.goal-name{font-size:15px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px;}
+.goal-sub{font-size:12px;color:var(--text2);}
+.gtop-acts{display:flex;gap:5px;align-items:center;flex-shrink:0;}
+.mini-btn{width:30px;height:30px;border-radius:8px;background:var(--card2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;transition:all .15s;}
+.mini-btn:active{transform:scale(.86);}
+.done-badge{background:var(--teal-lt);color:var(--teal);border-radius:20px;padding:3px 9px;font-size:11px;font-weight:600;}
+
+/* DUAL SAVED */
+.dual-saved{display:flex;gap:7px;margin-bottom:11px;}
+.csb{flex:1;border-radius:var(--radius-sm);padding:9px 11px;transition:background .35s;}
+.csb.kip{background:var(--kip-bg);}
+.csb.baht{background:var(--baht-bg);}
+.csb-lbl{font-size:10px;font-weight:600;letter-spacing:.5px;margin-bottom:2px;}
+.csb.kip .csb-lbl{color:var(--kip);}
+.csb.baht .csb-lbl{color:var(--baht);}
+.csb-val{font-family:'Kanit',sans-serif;font-size:17px;font-weight:700;line-height:1;}
+.csb.kip .csb-val{color:var(--kip);}
+.csb.baht .csb-val{color:var(--baht);}
+.csb-tgt{font-size:11px;color:var(--text3);margin-top:1px;}
+
+/* PROGRESS */
+.prog-section{margin-bottom:11px;}
+.prog-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
+.prog-lbl{font-size:12px;color:var(--text2);}
+.prog-pct{font-size:13px;font-weight:600;}
+.prog-track{height:10px;background:var(--bg2);border-radius:10px;overflow:hidden;transition:background .35s;}
+.prog-fill{height:100%;border-radius:10px;transition:width .7s cubic-bezier(.34,1.4,.64,1),background .5s ease;}
+.goal-pace{font-size:11px;font-weight:500;color:var(--accent-deep);margin-top:8px;background:var(--accent-soft);padding:5px 9px;border-radius:6px;display:inline-block;transition:all 0.3s;}
+
+/* ACTION BTNS */
+.goal-actions{display:flex;gap:7px;}
+.action-btn{flex:1;padding:9px 0;border-radius:var(--radius-sm);border:none;font-family:'Mitr',sans-serif;font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;transition:all .2s;}
+.action-btn:active{transform:scale(.95);}
+.btn-kip{background:var(--kip-bg);color:var(--kip);}
+.btn-baht{background:var(--baht-bg);color:var(--baht);}
+.btn-out{background:var(--bg2);color:var(--text2);border:1px solid var(--border);}
+
+/* EMPTY */
+.empty{text-align:center;padding:48px 20px;}
+.empty-pig{font-size:60px;margin-bottom:14px;animation:bounce 2s ease-in-out infinite;}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.empty-title{font-family:'Kanit',sans-serif;font-size:20px;font-weight:600;color:var(--text);margin-bottom:6px;}
+.empty-sub{font-size:14px;color:var(--text2);line-height:1.7;}
+
+/* BOTTOM NAV WITH AUTO HIDE EFFECT & FIXED FAB POSITION */
+.bottom-nav{position:absolute;bottom:0;left:0;right:0;background:var(--bg);border-top:1.5px solid var(--border);display:flex;padding:8px 16px 16px;z-index:150;backdrop-filter:blur(14px);transition:transform .35s cubic-bezier(0.4, 0, 0.2, 1), background .35s, border-color .35s; justify-content: space-between; align-items: center;}
+.bottom-nav.hide {transform: translateY(100%);}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;color:var(--text3);font-size:11px;font-weight:500;transition:color .2s;}
+.nav-item.active{color:var(--accent);}
+.nav-icon{font-size:20px;}
+
+.nav-fab-container { position: relative; width: 60px; display: flex; justify-content: center; align-items: center; }
+.nav-fab{position:absolute; top:-35px; width:54px;height:54px;border-radius:18px;background:var(--accent);color:#fff;border:none;font-size:28px;cursor:pointer;box-shadow:0 4px 16px var(--accent-glow);display:flex;align-items:center;justify-content:center;transition:transform .2s,background .35s,box-shadow .35s;}
+.nav-fab:active{transform:scale(.92);}
+
+/* OVERLAY + SHEET */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);z-index:200;opacity:0;pointer-events:none;transition:opacity .3s;}
+.overlay.open{opacity:1;pointer-events:all;}
+.sheet{position:fixed;bottom:0;left:50%;transform:translate(-50%,110%);width:100%;max-width:430px;background:var(--card);border-radius:28px 28px 0 0;padding:16px 20px 50px;z-index:300;transition:transform .38s cubic-bezier(.32,1.1,.64,1),background .35s;max-height:92vh;overflow-y:auto;}
+.sheet.open{transform:translate(-50%,0);}
+.sheet-handle{width:36px;height:4px;background:var(--bg3);border-radius:4px;margin:0 auto 20px;}
+.sheet-title{font-family:'Kanit',sans-serif;font-size:22px;font-weight:700;color:var(--text);margin-bottom:20px;}
+
+/* FORM */
+.form-group{margin-bottom:14px;}
+.form-label{font-size:12px;font-weight:600;color:var(--text2);letter-spacing:.4px;margin-bottom:7px;display:block;}
+.form-input{width:100%;padding:12px 14px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:var(--bg2);font-family:'Mitr',sans-serif;font-size:15px;color:var(--text);outline:none;transition:border-color .2s,background .35s,color .35s;-webkit-appearance:none;}
+.form-input:focus{border-color:var(--accent);}
+.form-input::placeholder{color:var(--text3);}
+.inp-kip{border-color:rgba(224,123,57,.3)!important;background:var(--kip-bg)!important;color:var(--kip)!important;}
+.inp-kip:focus{border-color:var(--kip)!important;}
+.inp-baht{border-color:rgba(26,111,181,.3)!important;background:var(--baht-bg)!important;color:var(--baht)!important;}
+.inp-baht:focus{border-color:var(--baht)!important;}
+.inp-kip::placeholder{color:rgba(224,123,57,.4);}
+.inp-baht::placeholder{color:rgba(26,111,181,.4);}
+.dual-row{display:flex;gap:10px;}
+.dual-row>div{flex:1;}
+
+/* ICON SOURCE SELECTOR */
+.icon-src-toggle{display:flex;gap:8px;margin-bottom:10px;}
+.src-btn{flex:1;padding:8px;border-radius:10px;border:1.5px solid var(--border);background:var(--card2);color:var(--text);font-family:'Mitr',sans-serif;font-size:12px;cursor:pointer;transition:all .2s;}
+.src-btn.sel{background:var(--accent);color:#fff;border-color:var(--accent);}
+.file-input-wrapper{background:var(--bg2);border:1.5px dashed var(--border);border-radius:var(--radius-sm);padding:16px;text-align:center;position:relative;cursor:pointer;}
+.file-input-wrapper input[type="file"]{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer;}
+.img-preview-slot{width:50px;height:50px;border-radius:12px;background:var(--card);margin:8px auto 0;display:flex;align-items:center;justify-content:center;overflow:hidden;border:1px solid var(--border);font-size:20px;color:var(--text3);}
+.img-preview-slot img{width:100%;height:100%;object-fit:cover;}
+
+.emoji-row{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;}
+.emoji-chip{aspect-ratio:1;border-radius:12px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:23px;cursor:pointer;border:2.5px solid transparent;transition:all .15s;}
+.emoji-chip:active{transform:scale(.86);}
+.emoji-chip.sel{border-color:var(--accent);background:var(--accent-soft);}
+
+.qrow{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap;}
+.qc{padding:5px 10px;border-radius:20px;font-family:'Mitr',sans-serif;font-size:11px;cursor:pointer;transition:opacity .15s;}
+.qc:active{opacity:.65;}
+.qc.kip{border:1.5px solid rgba(224,123,57,.4);color:var(--kip);background:var(--kip-bg);}
+.qc.baht{border:1.5px solid rgba(26,111,181,.4);color:var(--baht);background:var(--baht-bg);}
+
+.txn-toggle{display:flex;gap:8px;margin-bottom:14px;}
+.txn-cb{flex:1;padding:10px;border-radius:var(--radius-sm);border:1.5px solid;font-family:'Mitr',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all .2s;background:transparent;}
+.txn-cb.kip{border-color:rgba(224,123,57,.4);color:var(--kip);}
+.txn-cb.baht{border-color:rgba(26,111,181,.4);color:var(--baht);}
+.txn-cb.kip.sel{background:var(--kip);color:#fff;border-color:var(--kip);}
+.txn-cb.baht.sel{background:var(--baht);color:#fff;border-color:var(--baht);}
+
+.gp-box{display:flex;align-items:center;gap:10px;background:var(--bg2);border-radius:var(--radius-sm);padding:11px 14px;margin-bottom:16px;transition:background .35s;}
+
+.btn-primary{width:100%;padding:14px;border-radius:var(--radius-sm);border:none;background:var(--accent);color:#fff;font-family:'Mitr',sans-serif;font-size:16px;font-weight:500;cursor:pointer;margin-top:10px;box-shadow:0 4px 16px var(--accent-glow);transition:all .2s;}
+.btn-primary:active{transform:scale(.97);}
+.btn-secondary{width:100%;padding:12px;border-radius:var(--radius-sm);border:1.5px solid var(--border);background:transparent;font-family:'Mitr',sans-serif;font-size:14px;color:var(--text2);cursor:pointer;margin-top:7px;}
+.btn-danger{width:100%;padding:12px;border-radius:var(--radius-sm);border:none;background:#fff2f1;color:var(--red);font-family:'Mitr',sans-serif;font-size:14px;font-weight:500;cursor:pointer;margin-top:7px;}
+
+/* SETTINGS */
+.s-section{margin-bottom:22px;}
+.s-title{font-size:11px;font-weight:600;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;}
+.dark-row{display:flex;align-items:center;justify-content:space-between;background:var(--card2);border-radius:var(--radius-sm);padding:14px 16px;border:1.5px solid var(--border);transition:background .35s;}
+.dark-lbl{font-size:14px;font-weight:500;color:var(--text);}
+.sw{position:relative;width:48px;height:26px;}
+.sw input{opacity:0;width:0;height:0;}
+.sw-track{position:absolute;inset:0;border-radius:20px;background:var(--bg3);cursor:pointer;transition:background .3s;}
+.sw-track::after{content:'';position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .3s;box-shadow:0 1px 4px rgba(0,0,0,.2);}
+.sw input:checked+.sw-track{background:var(--accent);}
+.sw input:checked+.sw-track::after{transform:translateX(22px);}
+.theme-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:9px;}
+.theme-dot{aspect-ratio:1;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.15);}
+.theme-dot.sel{border-color:var(--text);transform:scale(1.15);}
+.bg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;}
+.bg-swatch{cursor:pointer;border-radius:10px;padding:8px 6px;font-size:11px;text-align:center;transition:border-color .2s;box-shadow:0 1px 6px rgba(0,0,0,.1);}
+
+/* LANG TOGGLE */
+.lang-toggle{display:flex;gap:6px;}
+.lang-btn{flex:1;padding:8px;border-radius:10px;border:1.5px solid var(--border);background:var(--card2);color:var(--text);font-family:'Mitr',sans-serif;font-size:12px;cursor:pointer;transition:all .2s;}
+.lang-btn.sel{background:var(--accent);color:#fff;border-color:var(--accent);}
+
+/* CREATOR CREDIT */
+.credit-box{text-align:center;margin-top:25px;padding-top:15px;border-top:1.5px dashed var(--border);font-size:12px;color:var(--text3);font-weight:400;letter-spacing:0.5px;}
+.credit-box b{color:var(--text2);}
+
+/* HISTORY */
+.history-item{display:flex;align-items:center;gap:11px;padding:12px 14px;background:var(--card);border-radius:var(--radius-sm);margin-bottom:8px;box-shadow:var(--shadow);border:1px solid var(--border);transition:background .35s;position:relative;padding-right:45px;}
+.hist-ico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;font-family:'Kanit',sans-serif;flex-shrink:0;overflow:hidden;}
+.hist-ico img{width:100%;height:100%;object-fit:cover;}
+.hist-ico.ki{background:var(--kip-bg);color:var(--kip);}
+.hist-ico.bi{background:var(--baht-bg);color:var(--baht);}
+.hist-ico.out{background:#fff2f1;color:var(--red);}
+.hist-info{flex:1;min-width:0;}
+.hist-name{font-size:13px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.hist-sub{font-size:11px;color:var(--text3);margin-top:1px;}
+.hist-amt{font-family:'Kanit',sans-serif;font-size:15px;font-weight:600;flex-shrink:0;}
+.hist-amt.ki{color:var(--kip);}
+.hist-amt.bi{color:var(--baht);}
+.hist-amt.out{color:var(--red);}
+.hist-del{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:30px;height:30px;background:#fff2f1;color:var(--red);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;border:none;opacity:0.7;transition:all .2s;}
+.hist-del:active{opacity:1;transform:translateY(-50%) scale(0.9);}
+
+.confetti-wrap{position:fixed;inset:0;pointer-events:none;z-index:999;}
+.conf::{position:absolute;animation:fall linear forwards;}
+@keyframes fall{0%{opacity:1;transform:translateY(-20px) rotate(0)}100%{opacity:0;transform:translateY(100vh) rotate(720deg)}}
+.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(14px);background:var(--text);color:var(--bg);padding:10px 22px;border-radius:30px;font-size:13px;font-weight:500;z-index:500;opacity:0;transition:all .3s;white-space:nowrap;pointer-events:none;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ===== SPLASH SCREEN ===== */
+#splashScreen {
+  position: fixed; inset: 0; z-index: 9999;
+  background: linear-gradient(145deg, #1a1208 0%, #2a1e10 50%, #1a1208 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+#splashScreen.hide { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.splash-logo-wrap {
+  display: flex; flex-direction: column; align-items: center; gap: 0;
+  animation: splashPulse 2s ease-in-out infinite;
+}
+@keyframes splashPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.04)} }
+
+.splash-pig { font-size: 72px; margin-bottom: 8px; filter: drop-shadow(0 8px 24px rgba(244,132,95,0.5)); }
+.splash-app-name {
+  font-family: 'Kanit', sans-serif; font-size: 34px; font-weight: 700;
+  color: #fff; letter-spacing: 1px; margin-bottom: 4px;
+}
+.splash-app-name span { color: var(--accent, #f4845f); }
+.splash-tagline { font-size: 13px; color: rgba(255,255,255,0.5); letter-spacing: 0.5px; margin-bottom: 48px; }
+
+.splash-loader {
+  width: 180px; height: 4px; background: rgba(255,255,255,0.12);
+  border-radius: 4px; overflow: hidden; margin-bottom: 48px;
+}
+.splash-loader-bar {
+  height: 100%; width: 0%; background: linear-gradient(90deg, #f4845f, #f7c948);
+  border-radius: 4px; animation: splashLoad 2s ease forwards;
+}
+@keyframes splashLoad { 0%{width:0%} 60%{width:80%} 90%{width:95%} 100%{width:100%} }
+
+.splash-credit {
+  position: absolute; bottom: 36px; text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.splash-by { font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 1px; text-transform: uppercase; }
+.splash-name { font-family: 'Kanit', sans-serif; font-size: 17px; font-weight: 600; color: rgba(255,255,255,0.85); }
+.splash-contacts { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.splash-contact-row { font-size: 12px; color: rgba(255,255,255,0.45); display: flex; align-items: center; gap: 5px; }
+.splash-contact-row span { color: rgba(255,255,255,0.65); }
+.splash-divider { width: 40px; height: 1px; background: rgba(255,255,255,0.12); margin: 4px 0; }
+
+/* GREETING POPUP RIGHT SIDE */
+.greet-popup{position:fixed;top:32px;right:-280px;background:var(--card);color:var(--text);padding:12px 20px;border-radius:16px 0 0 16px;font-size:14px;font-weight:500;box-shadow:-2px 4px 18px rgba(0,0,0,0.12);z-index:600;display:flex;align-items:center;gap:10px;transition:right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);border:1.5px solid var(--border);border-right:none;}
+.greet-popup.show{right:0;}
+.greet-avatar{font-size:20px;}
+
+.page{display:none;}
+.page.active{display:block;}
+
+/* -------------------------------------------
+   RESPONSIVE LAYOUT FOR PC & TABLET 
+------------------------------------------- */
+@media (min-width: 600px) {
+  body { display: flex; justify-content: center; background-color: #e5e5e5; }
+  .dark body { background-color: #0a0a0a; }
+  
+  .app { 
+    max-width: 800px; width: 100%; 
+    border-left: 1px solid var(--border); 
+    border-right: 1px solid var(--border);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+  
+  #goalList { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  #historyList { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .sheet { max-width: 600px; border-radius: 28px 28px 0 0; }
+  
+  .header { padding-top: 40px; }
+}
+
+@media (min-width: 1024px) {
+  .app { max-width: 1000px; }
+  #goalList, #historyList { grid-template-columns: repeat(3, 1fr); }
+  .sheet { max-width: 700px; }
+}
+</style>
+</head>
+<body>
+<div class="app theme-orange" id="app">
+
+  <div class="header" id="appHeader">
+    <div class="header-row">
+      <div class="app-title-container">
+        <div class="app-title" id="txtAppName">ກະປຸກ<span>.</span></div>
+        <div class="sys-time" id="sysTime">00:00:00</div>
+      </div>
+      <div class="hdr-btns">
+        <div class="icon-btn" onclick="openSheet('shSettings')">⚙️</div>
+        <div class="icon-btn" id="darkBtn" onclick="toggleDark()">🌙</div>
+      </div>
+    </div>
+    <div class="summary-card">
+      <div class="sum-label" id="txtTotalSaved">ຍອດລວມທີ່ເກັບໄດ້</div>
+      <div class="sum-row">
+        <div><div class="sum-cur" id="txtKipUnit">ກີບ ₭</div><div class="sum-amt" id="sumKip">0</div></div>
+        <div class="sum-div"></div>
+        <div><div class="sum-cur" id="txtBahtUnit">ບາດ ฿</div><div class="sum-amt" id="sumBaht">0</div></div>
+      </div>
+      <div class="sum-stats">
+        <div class="stat-pill"><span id="txtStatGoals">🎯 </span><span id="statGoals">0</span> <span id="txtGoalsUnit">ເປົ້າ</span></div>
+        <div class="stat-pill"><span id="txtStatDone">✅ </span><span id="statDone">0</span> <span id="txtDoneUnit">ສຳເລັດ</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-area" id="scrollArea">
+    <div class="page active" id="pageHome">
+      <div class="sec-lbl" id="txtMyGoals">%ເປົ້າໝາຍຂອງຂ້ອຍ</div>
+      <div id="goalList"></div>
+    </div>
+    <div class="page" id="pageHistory">
+      <div class="sec-lbl" id="txtHistTitle">ປະຫວັດການເກັບ</div>
+      <div id="historyList"></div>
+    </div>
+  </div>
+
+  <div class="bottom-nav" id="bottomNav">
+    <div class="nav-item active" id="navHome" onclick="showPage('Home')">
+      <div class="nav-icon">🏠</div><span id="txtNavHome">ໜ້າຫຼັກ</span>
+    </div>
+    <div class="nav-fab-container">
+      <button class="nav-fab" id="fabBtn">+</button>
+    </div>
+    <div class="nav-item" id="navHistory" onclick="showPage('History')">
+      <div class="nav-icon">📋</div><span id="txtNavHist">ປະຫວັດ</span>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="ovGoal" onclick="closeSheet('shGoal')"></div>
+<div class="sheet" id="shGoal">
+  <div class="sheet-handle"></div>
+  <div class="sheet-title" id="goalFormTitle">✨ ຕັ້ງເປົ້າໝາຍໃໝ່</div>
+  <div class="form-group">
+    <label class="form-label" id="lblWant">ຢາກໄດ້ຫຍັງ?</label>
+    <input type="text" class="form-input" id="gName" placeholder="ເຊັ່ນ: iPhone, ກະເປົ໋າ, ທ່ຽວ…"/>
+  </div>
+  <div class="form-group">
+    <label class="form-label" id="lblIconSrc">ແຫຼ່ງຮູບພາບ / ໄອຄອນ</label>
+    <div class="icon-src-toggle">
+      <button class="src-btn sel" id="srcEmojiBtn" onclick="setIconSrc('emoji')">Emoji ໄອຄອນ</button>
+      <button class="src-btn" id="srcDeviceBtn" onclick="setIconSrc('device')">ຮູບໃນເຄື່ອງ</button>
+    </div>
+    
+    <div id="boxEmojiSrc">
+      <div class="emoji-row" id="emojiRow"></div>
+    </div>
+    
+    <div id="boxDeviceSrc" style="display:none;">
+      <div class="file-input-wrapper" onclick="document.getElementById('gImageFile').click()">
+        <span id="txtUploadTrigger">📸 ກົດເພື່ອເລືອກຮູບພາບ</span>
+        <input type="file" id="gImageFile" accept="image/*" onchange="previewImage(this)"/>
+        <div class="img-preview-slot" id="gImgPreview">🖼️</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="form-label" id="lblTargetPrice">ລາຄາເປົ້າໝາຍ <span style="color:var(--text3);font-weight:300" id="lblTargetSub">(ໃສ່ 1 ຫຼື 2 ສະກຸນ)</span></label>
+    <div class="dual-row">
+      <div>
+        <label class="form-label" style="color:var(--kip)">₭ ກີບ</label>
+        <input type="number" class="form-input inp-kip" id="gTKip" placeholder="0" inputmode="numeric"/>
+        <div class="qrow" id="qkGoalKip"></div>
+      </div>
+      <div>
+        <label class="form-label" style="color:var(--baht)">฿ ບາດ</label>
+        <input type="number" class="form-input inp-baht" id="gTBaht" placeholder="0" inputmode="numeric"/>
+        <div class="qrow" id="qkGoalBaht"></div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="form-label" id="lblDate">ວັນທີ່ຕ້ອງການ <span style="color:var(--text3);font-weight:300" id="lblOptional">(ທາງເລືອກ)</span></label>
+    <input type="date" class="form-input" id="gDate"/>
+  </div>
+  <button class="btn-primary" onclick="saveGoal()" id="btnSaveGoal">💾 ບັນທຶກ</button>
+  <button class="btn-secondary" onclick="closeSheet('shGoal')" id="btnCancelGoal">ຍົກເລີກ</button>
+</div>
+
+<div class="overlay" id="ovTxn" onclick="closeSheet('shTxn')"></div>
+<div class="sheet" id="shTxn">
+  <div class="sheet-handle"></div>
+  <div class="sheet-title" id="txnTitle">💰 ຝາກເງິນ</div>
+  <div class="gp-box">
+    <span id="txnGIco" style="width:36px;height:36px;font-size:26px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:8px;"></span>
+    <div>
+      <div id="txnGName" style="font-size:14px;font-weight:600;color:var(--text)"></div>
+      <div id="txnGInfo" style="font-size:12px;color:var(--text2);margin-top:2px"></div>
+    </div>
+  </div>
+  <div class="txn-toggle">
+    <button class="txn-cb kip sel" id="tbKip"  onclick="setTxnCur('KIP')">₭ ກີບ</button>
+    <button class="txn-cb baht"    id="tbBaht" onclick="setTxnCur('THB')">฿ ບາດ</button>
+  </div>
+  <div class="form-group">
+    <label class="form-label" id="txnAmtLbl">ຈຳນວນ (ກີບ ₭)</label>
+    <input type="number" class="form-input" id="txnAmt" placeholder="0" inputmode="numeric"/>
+    <div class="qrow" id="qkTxn"></div>
+  </div>
+  <div class="form-group">
+    <label class="form-label" id="lblTxnNote">ໝາຍເຫດ <span style="color:var(--text3);font-weight:300" id="lblOptionalTxn">(ທາງເລືອກ)</span></label>
+    <input type="text" class="form-input" id="txnNote" placeholder="ເຊັ່ນ: ເງິນເດືອນ, ຂອງຂວັນ…"/>
+  </div>
+  <button class="btn-primary" id="txnConfBtn" onclick="confirmTxn()">ຢືນຢັນ ✓</button>
+  <button class="btn-secondary" onclick="closeSheet('shTxn')" id="btnCancelTxn">ຍົກເລີກ</button>
+</div>
+
+<div class="overlay" id="ovDel" onclick="closeSheet('shDel')"></div>
+<div class="sheet" id="shDel">
+  <div class="sheet-handle"></div>
+  <div class="sheet-title" id="txtDelTitle">🗑️ ລຶບເປົ້າໝາຍ?</div>
+  <p style="font-size:14px;color:var(--text2);margin-bottom:16px;line-height:1.7" id="txtDelSub">ຂໍ້ມູນຈະຖືກລຶບໝົດ ແລະ ບໍ່ສາມາດກູ້ຄືນໄດ້</p>
+  <div class="gp-box">
+    <span id="delIcon" style="width:36px;height:36px;font-size:26px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:8px;"></span>
+    <div>
+      <div id="delName" style="font-size:15px;font-weight:600;color:var(--text)"></div>
+      <div id="delSaved" style="font-size:12px;color:var(--text2);margin-top:2px"></div>
+    </div>
+  </div>
+  <button class="btn-danger" onclick="confirmDelete()" id="btnConfirmDel">ລຶບເລີຍ</button>
+  <button class="btn-secondary" onclick="closeSheet('shDel')" id="btnCancelDel">ບໍ່ລຶບ</button>
+</div>
+
+<div class="overlay" id="ovSettings" onclick="closeSheet('shSettings')"></div>
+<div class="sheet" id="shSettings">
+  <div class="sheet-handle"></div>
+  <div class="sheet-title" id="txtSettingsTitle">🎨 ຕັ້ງຄ່າ</div>
+
+  <div class="s-section">
+    <div class="s-title" id="txtDataSetting">ຈັດການຂໍ້ມູນ / Data Management</div>
+    <div class="dual-row">
+      <button class="btn-secondary" onclick="exportData()" id="btnExport" style="margin-top:0">📥 ດາວໂຫຼດ (Export)</button>
+      <div class="file-input-wrapper" style="padding:0; border:none; background:transparent; flex:1;">
+         <button class="btn-secondary" style="width:100%; margin-top:0;" onclick="document.getElementById('importFile').click()" id="btnImport">📤 ນຳເຂົ້າ (Import)</button>
+         <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(this)">
+      </div>
+    </div>
+  </div>
+
+  <div class="s-section">
+    <div class="s-title" id="txtLangSetting">ພາສາ / Language</div>
+    <div class="lang-toggle">
+      <button class="lang-btn sel" id="lang_lo" onclick="changeLang('lo')">ພາສາລາວ</button>
+      <button class="lang-btn" id="lang_th" onclick="changeLang('th')">ภาษาไทย</button>
+      <button class="lang-btn" id="lang_en" onclick="changeLang('en')">English</button>
+    </div>
+  </div>
+
+  <div class="s-section">
+    <div class="s-title" id="txtDarkSetting">ໂໝດກາງຄືນ</div>
+    <div class="dark-row">
+      <span class="dark-lbl" id="darkLbl">🌙 Dark Mode</span>
+      <label class="sw">
+        <input type="checkbox" id="darkCheck" onchange="toggleDark()">
+        <div class="sw-track"></div>
+      </label>
+    </div>
+  </div>
+
+  <div class="s-section">
+    <div class="s-title" id="txtThemeSetting">ສີ Accent</div>
+    <div class="theme-grid" id="themeGrid"></div>
+  </div>
+
+  <div class="s-section" id="bgSection">
+    <div class="s-title" id="txtBgSetting">ສີພື້ນຫຼັງ <span style="color:var(--text3);font-weight:300;font-size:10px" id="txtBgSub">(ໃຊ້ໃນ Light Mode)</span></div>
+    <div class="bg-grid" id="bgGrid"></div>
+  </div>
+
+  <button class="btn-secondary" onclick="closeSheet('shSettings')" id="btnCloseSettings">ປິດ</button>
+  
+  <div class="credit-box">
+    <div style="margin-bottom:4px">🛠️ Created by</div>
+    <b>Ohday Sisomephone</b>
+    <div style="margin-top:6px;display:flex;flex-direction:column;gap:3px">
+      <div>📞 +856 20 98 266 768</div>
+      <div>👤 Facebook: Ohday Sisomephone</div>
+    </div>
+  </div>
+</div>
+
+<!-- SPLASH SCREEN -->
+<div id="splashScreen">
+  <div class="splash-logo-wrap">
+    <div class="splash-pig">🐷</div>
+    <div class="splash-app-name">ກະປຸກ<span>.</span></div>
+    <div class="splash-tagline">ກະປຸກເກັບເງີນ ຂອງ ໂອເດ</div>
+  </div>
+  <div class="splash-loader"><div class="splash-loader-bar" id="splashBar"></div></div>
+  <div class="splash-credit">
+    <div class="splash-by">Created by</div>
+    <div class="splash-name">Ohday Sisomephone</div>
+    <div class="splash-divider"></div>
+    <div class="splash-contacts">
+      <div class="splash-contact-row">📞 <span>+856 20 98 266 768</span></div>
+      <div class="splash-contact-row">👤 <span>Facebook: Ohday Sisomephone</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="confetti-wrap" id="confettiWrap"></div>
+<div class="toast" id="toast"></div>
+
+<div class="greet-popup" id="greetPopup">
+  <span class="greet-avatar" id="greetIcon">🌅</span>
+  <span id="greetText">ສະບາຍດີຕອນເຊົ້າ</span>
+</div>
+
+<script>
+const EMOJIS=['📱','💻','👜','👟','✈️','🏠','🚗','💎','🎮','📷','⌚','🎸','🎓','🌴','💍','🎁','🛒','☕','🍜','🧳','🎯','🏖️','🎪'];
+const QK=[10000,50000,100000,500000,1000000];
+const QB=[20,50,100,500,1000];
+const THEMES=[
+  {id:'orange',color:'#f4845f'},{id:'rose',color:'#f43f5e'},
+  {id:'purple',color:'#8b5cf6'},{id:'blue',color:'#3b82f6'},
+  {id:'teal',color:'#0d9488'},{id:'green',color:'#22c55e'},
+];
+const BGS=[
+  {id:'warm',   label:'🟤 Warm',   bg:'#fdf6ed',bg2:'#f5ede0',bg3:'#ede0ce'},
+  {id:'cool',   label:'🔵 Cool',   bg:'#f0f4ff',bg2:'#e5ecff',bg3:'#d4e0ff'},
+  {id:'mint',   label:'🟢 Mint',   bg:'#f0fdf4',bg2:'#e4f7eb',bg3:'#c6edd4'},
+  {id:'lavender',label:'🟣 Lav',   bg:'#faf0ff',bg2:'#f0e4ff',bg3:'#e2ceff'},
+  {id:'blush',  label:'🩷 Blush',  bg:'#fff0f4',bg2:'#ffe4ea',bg3:'#ffd0da'},
+  {id:'slate',  label:'⬜ Slate',  bg:'#f8fafc',bg2:'#f1f5f9',bg3:'#e2e8f0'},
+  {id:'sand',   label:'🟡 Sand',   bg:'#fefce8',bg2:'#fef9c3',bg3:'#fde68a'},
+  {id:'stone',  label:'⬛ Stone',  bg:'#f5f5f4',bg2:'#e7e5e4',bg3:'#d6d3d1'},
+];
+
+const TRANSLATIONS = {
+  lo: {
+    appName: "ການ<span>ເງີນ</span>", totalSaved: "ຍອດລວມທີ່ເກັບໄດ້", kipUnit: "ກີບ ₭", bahtUnit: "ບາດ ฿",
+    goalsUnit: "ເປົ້າໝາຍ", doneUnit: "ສຳເລັດ", myGoals: "ເປົ້າໝາຍຂອງຂ້ອຍ", histTitle: "ປະຫວັດການເກັບ",
+    navHome: "ໜ້າຫຼັກ", navHist: "ປະຫວັດ", newGoal: "✨ ຕັ້ງເປົ້າໝາຍໃໝ່", editGoal: "✏️ ແກ້ໄຂລາຍລະອຽດ",
+    want: "ຢາກໄດ້ຫຍັງ?", icon: "ໄອຄອນ", targetPrice: "ລາຄາເປົ້າໝາຍ ", targetSub: "(ໃສ່ 1 ຫຼື 2 ສະກຸນ)",
+    date: "ວັນທີ່ຕ້ອງການ ", optional: "(ທາງເລືອກ)", save: "💾 ບັນທຶກ", cancel: "ຍົກເລີກ",
+    deposit: "💰 ຝາກເງິນ", withdraw: "💸 ຖອນເງິນ", amountKip: "ຈຳນວນ (ກີບ ₭)", amountBaht: "ຈຳນວນ (ບາດ ฿)",
+    note: "ໝາຍເຫດ ", delTitle: "🗑️ ລຶບເປົ້າໝາຍ?", delSub: "ຂໍ້ມູນຈະຖືກລຶບໝົດ ແລະ ບໍ່ສາມາດກູ້ຄືນໄດ້",
+    delBtn: "ລຶບເລີຍ", noDelBtn: "ບໍ່ລຶບ", settings: "🎨 ຕັ້ງຄ່າ", langSetting: "ພາສາ / Language",
+    darkSetting: "ໂໝດກາງຄືນ", themeSetting: "ສີ Accent", bgSetting: "ສີພື້ນຫຼັງ ", bgSub: "(ໃຊ້ໃນ Light Mode)",
+    close: "ປິດ", noGoals: "ຍັງບໍ່ມີເປົ້າໝາຍ", clickFab: "ກົດ + ເພື່ອເລີ່ມ<br>ເກັບໄດ້ທັງ ₭ ແລະ ฿ ໃນກ້ອງດຽວ!",
+    noHist: "ຍັງບໍ່ມີລາຍການ", pleaseName: "ກະລຸນາໃສ່ຊື່", pleasePrice: "ໃສ່ລາຄາຢ່າງໜ້ອຍ 1 ສະກຸນ",
+    createSuccess: "✨ ສ້າງສຳເລັດ!", editSuccess: "✅ ແກ້ໄຂສຳເລັດ!", pleaseAmt: "ກະລຸນາໃສ່ຈຳນວນ",
+    kipNotEnough: "ກີບບໍ່ພໍ!", bahtNotEnough: "ບາດບໍ່ພໍ!", depSuccess: "✅ ຝາກສຳເລັດ!",
+    withSuccess: "✅ ຖອນສຳເລັດ!", doneBadge: "🎉 ຄົບ!", remText: "ຂາດ ", progressText: "ຄືບໜ້າ",
+    doneAnim: "🎉 ຄົບເປົ້າໝາຍ!", delSuccess: "🗑️ ລຶບສຳເລັດ", savedText: "ເກັບໄດ້: ", notSavedYet: "ຍັງບໍ່ໄດ້ເກັບ",
+    leftDays: "ເຫຼືອ {d} ວັນ", today: "ມື້ນີ້!", overDate: "ເກີນກຳນົດ", deletedG: "ລຶບແລ້ວ",
+    goodMorning: "ສະບາຍດີຕອນເຊົ້າ", goodAfternoon: "ສະບາຍດີຕອນທ່ຽງ", goodEvening: "ສະບາຍດີຕອນແລງ", goodNight: "ສະບາຍດີຕອນຄືນ",
+    srcEmoji: "Emoji ໄອຄອນ", srcDevice: "ຮູບໃນເຄື່ອງ", uploadTrigger: "📸 ກົດເພື່ອເລືອກຮູບພາບ",
+    dataSetting: "ຈັດການຂໍ້ມູນ / Data Management", exportBtn: "📥 ດາວໂຫຼດ (Export)", importBtn: "📤 ນຳເຂົ້າ (Import)",
+    delTxnConfirm: "ທ່ານຕ້ອງການລຶບລາຍການນີ້ແທ້ບໍ່?", dailyPace: "💡 ຄວນເກັບມື້ລະ: "
+  },
+  th: {
+    appName: "การ<span>เงิน</span>", totalSaved: "ยอดรวมที่เก็บได้", kipUnit: "กีบ ₭", bahtUnit: "บาท ฿",
+    goalsUnit: "เป้าหมาย", doneUnit: "สำเร็จ", myGoals: "เป้าหมายของฉัน", histTitle: "ประวัติการออม",
+    navHome: "หน้าแรก", navHist: "ประวัติ", newGoal: "✨ ตั้งเป้าหมายใหม่", editGoal: "✏️ แก้ไขรายละเอียด",
+    want: "อยากได้อะไร?", icon: "ไอคอน", targetPrice: "ราคาเป้าหมาย ", targetSub: "(ใส่ 1 หรือ 2 สกุล)",
+    date: "วันที่ต้องการ ", optional: "(ทางเลือก)", save: "💾 บันทึก", cancel: "ยกเลิก",
+    deposit: "💰 ฝากเงิน", withdraw: "💸 ถอนเงิน", amountKip: "จำนวน (กีบ ₭)", amountBaht: "จำนวน (บาท ฿)",
+    note: "หมายเหตุ ", delTitle: "🗑️ ลบเป้าหมาย?", delSub: "ข้อมูลจะถูกลบทั้งหมดและไม่สามารถกู้คืนได้",
+    delBtn: "ลบเลย", noDelBtn: "ไม่ลบ", settings: "🎨 ตั้งค่า", langSetting: "ภาษา / Language",
+    darkSetting: "โหมดกลางคืน", themeSetting: "สี Accent", bgSetting: "สีพื้นหลัง ", bgSub: "(ใช้ใน Light Mode)",
+    close: "ปิด", noGoals: "ยังไม่มีเป้าหมาย", clickFab: "กด + เพื่อเริ่มต้น<br>เก็บได้ทั้ง ₭ และ ฿ ในกระปุกเดียว!",
+    noHist: "ยังไม่มีรายการ", pleaseName: "กรุณาใส่ชื่อ", pleasePrice: "ใส่ราคาอย่างน้อย 1 สกุล",
+    createSuccess: "✨ สร้างสำเร็จ!", editSuccess: "✅ แก้ไขสำเร็จ!", pleaseAmt: "กรุณาใส่จำนวน",
+    kipNotEnough: "เงินกีบไม่พอ!", bahtNotEnough: "เงินบาทไม่พอ!", depSuccess: "✅ ฝากสำเร็จ!",
+    withSuccess: "✅ ถอนสำเร็จ!", doneBadge: "🎉 ครบ!", remText: "ขาด ", progressText: "คืบหน้า",
+    doneAnim: "🎉 ครบเป้าหมาย!", delSuccess: "🗑️ ลบสำเร็จ", savedText: "เก็บได้: ", notSavedYet: "ยังไม่ได้เก็บ",
+    leftDays: "เหลือ {d} วัน", today: "วันนี้!", overDate: "เกินกำหนด", deletedG: "ลบแล้ว",
+    goodMorning: "สวัสดีตอนเช้า", goodAfternoon: "สวัสดีตอนเที่ยง", goodEvening: "สวัสดีตอนเย็น", goodNight: "สวัสดีตอนดึก",
+    srcEmoji: "Emoji ไอคอน", srcDevice: "รูปภาพในเครื่อง", uploadTrigger: "📸 กดเพื่อเลือกรูปภาพ",
+    dataSetting: "จัดการข้อมูล", exportBtn: "📥 ส่งออก (Export)", importBtn: "📤 นำเข้า (Import)",
+    delTxnConfirm: "คุณต้องการลบรายการนี้ใช่หรือไม่?", dailyPace: "💡 ควรเก็บวันละ: "
+  },
+  en: {
+    appName: "Asset<span> Money", totalSaved: "Total Balance Saved", kipUnit: "Kip ₭", bahtUnit: "Baht ฿",
+    goalsUnit: "Goals", doneUnit: "Done", myGoals: "My Savings Goals", histTitle: "Savings History",
+    navHome: "Home", navHist: "History", newGoal: "✨ New Savings Goal", editGoal: "✏️ Edit Details",
+    want: "What do you want?", icon: "Icon", targetPrice: "Target Price ", targetSub: "(Enter 1 or 2 currencies)",
+    date: "Target Date ", optional: "(Optional)", save: "💾 Save", cancel: "Cancel",
+    deposit: "💰 Deposit", withdraw: "💸 Withdraw", amountKip: "Amount (Kip ₭)", amountBaht: "Amount (Baht ฿)",
+    note: "Note ", delTitle: "🗑️ Delete Goal?", delSub: "All data will be permanently deleted.",
+    delBtn: "Delete", noDelBtn: "Cancel", settings: "🎨 Settings", langSetting: "Language / ພາສາ",
+    darkSetting: "Dark Mode", themeSetting: "Accent Color", bgSetting: "Background ", bgSub: "(For Light Mode)",
+    close: "Close", noGoals: "No goals yet", clickFab: "Tap + to start<br>Save both ₭ and ฿ together!",
+    noHist: "No transaction history", pleaseName: "Please enter a name", pleasePrice: "Please enter at least 1 currency amount",
+    createSuccess: "✨ Goal Created!", editSuccess: "✅ Goal Updated!", pleaseAmt: "Please enter an amount",
+    kipNotEnough: "Not enough Kip!", bahtNotEnough: "Not enough Baht!", depSuccess: "✅ Deposited!",
+    withSuccess: "✅ Withdrawn!", doneBadge: "🎉 Done!", remText: "Needs ", progressText: "Progress",
+    doneAnim: "🎉 Goal Achieved!", delSuccess: "🗑️ Deleted successfully", savedText: "Saved: ", notSavedYet: "Empty",
+    leftDays: "{d} days left", today: "Today!", overDate: "Overdue", deletedG: "Deleted",
+    goodMorning: "Good morning", goodAfternoon: "Good afternoon", goodEvening: "Good evening", goodNight: "Good night",
+    srcEmoji: "Emoji Icon", srcDevice: "Device Image", uploadTrigger: "📸 Tap to choose an image",
+    dataSetting: "Data Management", exportBtn: "📥 Export JSON", importBtn: "📤 Import JSON",
+    delTxnConfirm: "Are you sure you want to delete this transaction?", dailyPace: "💡 Save daily: "
+  }
+};
+
+let goals = JSON.parse(localStorage.getItem('gk4_goals')||'[]');
+let txns  = JSON.parse(localStorage.getItem('gk4_txns') ||'[]');
+let prefs = JSON.parse(localStorage.getItem('gk4_prefs')||'{}');
+prefs.theme = prefs.theme||'orange';
+prefs.dark  = prefs.dark ||false;
+prefs.bgId  = prefs.bgId ||'warm';
+prefs.lang  = prefs.lang ||'lo';
+
+let selEmoji='📱', currentIconType='emoji', uploadedImageBase64='', editIdx=null, txnGoalIdx=null, txnType=null, txnCur='KIP', delIdx=null;
+let lastScrollTop = 0;
+
+// ===== SYSTEM CLOCK =====
+function updateSysClock() {
+  const now = new Date();
+  const localeStr = prefs.lang === 'en' ? 'en-US' : (prefs.lang === 'th' ? 'th-TH' : 'lo-LA');
+  document.getElementById('sysTime').textContent = now.toLocaleTimeString(localeStr, { hour12: false });
+}
+setInterval(updateSysClock, 1000);
+updateSysClock();
+
+function persist(){
+  localStorage.setItem('gk4_goals',JSON.stringify(goals));
+  localStorage.setItem('gk4_txns', JSON.stringify(txns));
+  localStorage.setItem('gk4_prefs',JSON.stringify(prefs));
+}
+
+// ===== EXPORT & IMPORT =====
+function exportData() {
+  const data = { goals, txns, prefs };
+  const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  const d = new Date();
+  const dStr = d.getFullYear() + String(d.getMonth()+1).padStart(2,'0') + String(d.getDate()).padStart(2,'0');
+  a.download = `kapuk_backup_${dStr}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function importData(input) {
+  if (!input.files || !input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (data.goals && data.txns) {
+        goals = data.goals;
+        txns = data.txns;
+        if (data.prefs) prefs = { ...prefs, ...data.prefs };
+        persist();
+        applyTheme();
+        render();
+        const l = TRANSLATIONS[prefs.lang] || TRANSLATIONS.lo;
+        showToast(l.editSuccess || "✅ ດຶງຂໍ້ມູນສຳເລັດ!");
+        closeSheet('shSettings');
+      } else {
+        alert("Invalid backup file format!");
+      }
+    } catch (err) {
+      alert("Error reading file: " + err);
+    }
+    input.value = ''; // Reset input
+  };
+  reader.readAsText(input.files[0]);
+}
+
+// ===== THEME & LANG =====
+function applyTheme(){
+  const app=document.getElementById('app');
+  THEMES.forEach(t=>app.classList.remove('theme-'+t.id));
+  app.classList.add('theme-'+prefs.theme);
+  if(prefs.dark) {
+    app.classList.add('dark');
+    document.body.classList.add('dark');
+  } else {
+    app.classList.remove('dark');
+    document.body.classList.remove('dark');
+  }
+  if(!prefs.dark){
+    const pal=BGS.find(p=>p.id===prefs.bgId)||BGS[0];
+    app.style.setProperty('--bg', pal.bg);
+    app.style.setProperty('--bg2',pal.bg2);
+    app.style.setProperty('--bg3',pal.bg3);
+  } else {
+    ['--bg','--bg2','--bg3'].forEach(v=>app.style.removeProperty(v));
+  }
+  document.getElementById('darkCheck').checked=prefs.dark;
+  document.getElementById('darkBtn').textContent=prefs.dark?'☀️':'🌙';
+  document.getElementById('darkLbl').textContent=prefs.dark?'☀️ Light Mode':'🌙 Dark Mode';
+  document.getElementById('bgSection').style.opacity=prefs.dark?'.4':'1';
+  document.getElementById('bgSection').style.pointerEvents=prefs.dark?'none':'all';
+  applyLanguage();
+}
+
+function toggleDark(){prefs.dark=!prefs.dark;persist();applyTheme();}
+function setTheme(id){prefs.theme=id;persist();applyTheme();renderThemeGrid();}
+function setBg(id){if(prefs.dark)return;prefs.bgId=id;persist();applyTheme();renderBgGrid();}
+
+function changeLang(lng) {
+  prefs.lang = lng;
+  persist();
+  applyLanguage();
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('sel'));
+  document.getElementById('lang_' + lng).classList.add('sel');
+  render();
+  updateSysClock();
+}
+
+function applyLanguage() {
+  const l = TRANSLATIONS[prefs.lang] || TRANSLATIONS.lo;
+  document.getElementById('txtAppName').innerHTML = l.appName;
+  document.getElementById('txtTotalSaved').textContent = l.totalSaved;
+  document.getElementById('txtKipUnit').textContent = l.kipUnit;
+  document.getElementById('txtBahtUnit').textContent = l.bahtUnit;
+  document.getElementById('txtGoalsUnit').textContent = l.goalsUnit;
+  document.getElementById('txtDoneUnit').textContent = l.doneUnit;
+  document.getElementById('txtMyGoals').textContent = l.myGoals;
+  document.getElementById('txtHistTitle').textContent = l.histTitle;
+  document.getElementById('txtNavHome').textContent = l.navHome;
+  document.getElementById('txtNavHist').textContent = l.navHist;
+  
+  // Sheet goal
+  document.getElementById('lblWant').textContent = l.want;
+  document.getElementById('lblIconSrc').textContent = l.icon;
+  document.getElementById('srcEmojiBtn').textContent = l.srcEmoji;
+  document.getElementById('srcDeviceBtn').textContent = l.srcDevice;
+  document.getElementById('txtUploadTrigger').textContent = l.uploadTrigger;
+  document.getElementById('lblTargetPrice').innerHTML = `${l.targetPrice} <span style="color:var(--text3);font-weight:300">${l.targetSub}</span>`;
+  document.getElementById('lblDate').innerHTML = `${l.date} <span style="color:var(--text3);font-weight:300">${l.optional}</span>`;
+  document.getElementById('btnSaveGoal').textContent = l.save;
+  document.getElementById('btnCancelGoal').textContent = l.cancel;
+  
+  // Sheet Txn
+  document.getElementById('lblTxnNote').innerHTML = `${l.note} <span style="color:var(--text3);font-weight:300">${l.optional}</span>`;
+  document.getElementById('btnCancelTxn').textContent = l.cancel;
+  
+  // Sheet Del
+  document.getElementById('txtDelTitle').textContent = l.delTitle;
+  document.getElementById('txtDelSub').textContent = l.delSub;
+  document.getElementById('btnConfirmDel').textContent = l.delBtn;
+  document.getElementById('btnCancelDel').textContent = l.noDelBtn;
+  
+  // Sheet Settings
+  document.getElementById('txtSettingsTitle').textContent = l.settings;
+  document.getElementById('txtLangSetting').textContent = l.langSetting;
+  document.getElementById('txtDarkSetting').textContent = l.darkSetting;
+  document.getElementById('txtThemeSetting').textContent = l.themeSetting;
+  document.getElementById('txtBgSetting').innerHTML = `${l.bgSetting} <span style="color:var(--text3);font-weight:300;font-size:10px">${l.bgSub}</span>`;
+  document.getElementById('btnCloseSettings').textContent = l.close;
+  
+  // Data Management 
+  document.getElementById('txtDataSetting').textContent = l.dataSetting;
+  document.getElementById('btnExport').textContent = l.exportBtn;
+  document.getElementById('btnImport').textContent = l.importBtn;
+}
+
+function renderThemeGrid(){
+  document.getElementById('themeGrid').innerHTML=THEMES.map(t=>
+    `<div class="theme-dot ${prefs.theme===t.id?'sel':''}" style="background:${t.color}" onclick="setTheme('${t.id}')"></div>`
+  ).join('');
+}
+function renderBgGrid(){
+  document.getElementById('bgGrid').innerHTML=BGS.map(p=>`
+    <div class="bg-swatch" onclick="setBg('${p.id}')"
+      style="background:${p.bg};border:2.5px solid ${prefs.bgId===p.id?'var(--accent)':'transparent'};color:#555"
+    >${p.label}</div>`
+  ).join('');
+}
+
+// ===== PROGRESS COLOR =====
+function pctColor(pct){
+  const stops=[[0,[220,38,38]],[25,[249,115,22]],[50,[234,179,8]],[75,[132,204,22]],[100,[34,197,94]]];
+  let lo=stops[0],hi=stops[stops.length-1];
+  for(let i=0;i<stops.length-1;i++) if(pct>=stops[i][0]&&pct<=stops[i+1][0]){lo=stops[i];hi=stops[i+1];break;}
+  const t=(pct-lo[0])/(hi[0]-lo[0]||1);
+  const r=Math.round(lo[1][0]+(hi[1][0]-lo[1][0])*t);
+  const g=Math.round(lo[1][1]+(hi[1][1]-lo[1][1])*t);
+  const b=Math.round(lo[1][2]+(hi[1][2]-lo[1][2])*t);
+  return `rgb(${r},${g},${b})`;
+}
+function pctGradient(pct){
+  const c=pctColor(pct);
+  const stops=[[0,[220,38,38]],[25,[249,115,22]],[50,[234,179,8]],[75,[132,204,22]],[100,[34,197,94]]];
+  let lo=stops[0],hi=stops[stops.length-1];
+  for(let i=0;i<stops.length-1;i++) if(pct>=stops[i][0]&&pct<=stops[i+1][0]){lo=stops[i];hi=stops[i+1];break;}
+  const np=Math.min(100,pct+15);
+  const c2=pctColor(np);
+  return `linear-gradient(90deg,${c},${c2})`;
+}
+
+// ===== PAGES =====
+function showPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page'+name).classList.add('active');
+  document.getElementById('nav'+name).classList.add('active');
+  if(name==='History') renderHistory();
+  document.getElementById('scrollArea').scrollTop=0;
+  document.getElementById('appHeader').classList.remove('scrolled');
+  document.getElementById('bottomNav').classList.remove('hide');
+}
+
+// ===== SHEETS =====
+function openSheet(id){
+  document.getElementById(id.replace('sh','ov')).classList.add('open');
+  document.getElementById(id).classList.add('open');
+}
+function closeSheet(id){
+  document.getElementById(id.replace('sh','ov')).classList.remove('open');
+  document.getElementById(id).classList.remove('open');
+}
+
+// ===== EMOJIS & IMAGE UPLOAD =====
+function renderEmojis(){
+  document.getElementById('emojiRow').innerHTML=EMOJIS.map(e=>
+    `<div class="emoji-chip ${e===selEmoji?'sel':''}" onclick="pickEmoji('${e}')">${e}</div>`
+  ).join('');
+}
+function pickEmoji(e){selEmoji=e;document.querySelectorAll('.emoji-chip').forEach(c=>c.classList.toggle('sel',c.textContent===e));}
+
+function setIconSrc(type){
+  currentIconType = type;
+  document.getElementById('srcEmojiBtn').classList.toggle('sel', type==='emoji');
+  document.getElementById('srcDeviceBtn').classList.toggle('sel', type==='device');
+  document.getElementById('boxEmojiSrc').style.display = type==='emoji'?'block':'none';
+  document.getElementById('boxDeviceSrc').style.display = type==='device'?'block':'none';
+}
+
+function previewImage(input) {
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      uploadedImageBase64 = e.target.result;
+      document.getElementById('gImgPreview').innerHTML = `<img src="${uploadedImageBase64}" />`;
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+function getGoalIconHtml(g){
+  if(g.iconType === 'device' && g.imageBlob){
+    return `<img src="${g.imageBlob}" alt="goal icon"/>`;
+  }
+  return g.emoji || '🐖';
+}
+
+// ===== QUICKS =====
+function renderGoalQs(){
+  document.getElementById('qkGoalKip').innerHTML=QK.map(a=>`<div class="qc kip" onclick="document.getElementById('gTKip').value=${a}">₭${a.toLocaleString('en')}</div>`).join('');
+  document.getElementById('qkGoalBaht').innerHTML=QB.map(a=>`<div class="qc baht" onclick="document.getElementById('gTBaht').value=${a}">฿${a.toLocaleString('en')}</div>`).join('');
+}
+function renderTxnQs(){
+  const list=txnCur==='KIP'?QK:QB,sym=txnCur==='KIP'?'₭':'฿',cls=txnCur==='KIP'?'kip':'baht';
+  document.getElementById('qkTxn').innerHTML=list.map(a=>`<div class="qc ${cls}" onclick="document.getElementById('txnAmt').value=${a}">${sym}${a.toLocaleString('en')}</div>`).join('');
+}
+
+// ===== GOAL FORM =====
+function openNewGoal(){
+  editIdx=null;
+  // Make sure image data and file input are completely cleared
+  uploadedImageBase64='';
+  document.getElementById('gImgPreview').innerHTML = '🖼️';
+  document.getElementById('gImageFile').value = '';
+  
+  const l = TRANSLATIONS[prefs.lang] || TRANSLATIONS.lo;
+  document.getElementById('goalFormTitle').textContent=l.newGoal;
+  ['gName','gTKip','gTBaht','gDate'].forEach(id=>document.getElementById(id).value='');
+  
+  selEmoji=EMOJIS[0]; 
+  setIconSrc('emoji');
+  renderEmojis(); 
+  renderGoalQs(); 
+  openSheet('shGoal');
+}
+
+function openEditGoal(idx){
+  editIdx=idx;
+  const g=goals[idx];
+  const l = TRANSLATIONS[prefs.lang] || TRANSLATIONS.lo;
+  document.getElementById('goalFormTitle').textContent=l.editGoal;
+  document.getElementById('gName').value=g.name;
+  document.getElementById('gTKip').value=g.targetKip||'';
+  document.getElementById('gTBaht').value=g.targetBaht||'';
+  document.getElementById('gDate').value=g.date||'';
+  
+  if(g.iconType === 'device' && g.imageBlob){
+    uploadedImageBase64 = g.imageBlob;
+    document.getElementById('gImgPreview').innerHTML = `<img src="${g.imageBlob}" />`;
+    setIconSrc('device');
+  } else {
+    uploadedImageBase64 = '';
+    document.getElementById('gImgPreview').innerHTML = '🖼️';
+    document.getElementById('gImageFile').value = '';
+    selEmoji=g.emoji||EMOJIS[0];
+    setIconSrc('emoji');
+  }
+  
+  renderEmojis(); renderGoalQs(); openSheet('shGoal');
+}
+
+function saveGoal(){
+  const name=document.getElementById('gName').value.trim();
+  const tK=parseFloat(document.getElementById('gTKip').value)||0;
+  const tB=parseFloat(document.getElementById('gTBaht').value)||0;
+  const date=document.getElementById('gDate').value;
+  const l = TRANSLATIONS[prefs.lang] || TRANSLATIONS.lo;
+  if(!name){showToast(l.pleaseName);return;}
+  if(!tK&&!tB){showToast(l.pleasePrice);return;}
+  
+  const iconData = {
+    name,
+    iconType: currentIconType,
+    emoji: currentIconType === 'emoji' ? selEmoji : '',
+    imageBlob: currentIconType === 'device' ? uploadedImageBase64 : '',
+    targetKip:Math.round(tK),
+    targetBaht:Math.round(tB),
+    date
+  };
+  
+  if(editIdx!==null){
+    Object.assign(goals[editIdx], iconData);
+    showToast(l.editSuccess);
+  } else {
+    goals.push(Object.assign({id:Date.now(),savedKip:0,savedBaht:0}, iconData));
+    showToast(l.createSuccess);
+  }
+  persist(); closeSheet('shGoal'); render();
+}
+
+// ===== TXN =====
+function setTxnCur(c){
+  const l = TRANSLATIONS[prefs.lang] || TRANSLATIONS.lo;
+  txnCur=c;
+  document.getElementById('tbKip').classList.toggle('sel',c==='KIP');
+  document.getElementById('tbBaht').classList.toggle('sel',c==='THB');
+  document.getElementById('txnAmtLbl').textContent=c==='KIP'?l.amountKip:l.amountBaht;
+  document.getElementById('txnAmt').value='';
+  renderTxnQs();
+}
+function openTxn(idx,type,cur){
+  txnGoalIdx=idx; txnType=type;
+  const g=goals[idx],isIn=type==='in';
+  const l = TRANSLATIONS[prefs.lang] || TRANSLATIONS.lo;
+  document.getElementById('txnTitle').textContent=isIn?l.deposit:l.withdraw;
+  document.getElementById('txnGIco').innerHTML=getGoalIconHtml(g);
+  document.getElementById('txnGName').textContent=g.name;
+  let inf=''; if(g.savedKip) inf+=`₭${g.savedKip.toLocaleString('en')} `; if(g.savedBaht) inf+=`฿${g.savedBaht.toLocaleString('en')}`;
+  document.getElementById('txnGInfo').textContent=inf?l.savedText+inf.trim():l.notSavedYet;
+  document.getElementById('txnAmt').value=''; document.getElementById('txnNote').value='';
+  const btn=document.getElementById('txnConfBtn');
+  btn.textContent=isIn?l.deposit+' ✓':l.withdraw+' ✓';
+  btn.style.background=isIn?'':'var(--red)';
+  txnCur=cur||'KIP';
+  document.getElementById('tbKip').classList.toggle('sel',txnCur==='KIP');
+  document.getElementById('tbBaht').classList.toggle('sel',txnCur==='THB');
+  document.getElementById('txnAmtLbl').textContent=txnCur==='KIP'?l.amountKip:l.amountBaht;
+  renderTxnQs(); openSheet('shTxn');
+}
+function confirmTxn(){
+  const raw=parseFloat(document.getElementById('txnAmt').value);
+  const note=document.getElementById('txnNote').value.trim();
+  const l = TRANSLATIONS[prefs.lang] || TRANSLATIONS.lo;
+  if(!raw||raw<=0){showToast(l.pleaseAmt);return;}
+  const amt=Math.round(raw),g=goals[txnGoalIdx],wasOk=isGoalDone(g);
+  if(txnType==='in'){ if(txnCur==='KIP') g.savedKip+=amt; else g.savedBaht+=amt; }
+  else {
+    if(txnCur==='KIP'){ if(amt>g.savedKip){showToast(l.kipNotEnough);return;} g.savedKip-=amt; }
+    else { if(amt>g.savedBaht){showToast(l.bahtNotEnough);return;} g.savedBaht-=amt; }
+  }
+  txns.push({id:Date.now(),goalId:g.id,type:txnType,cur:txnCur,amount:amt,note,date:new Date().toISOString()});
+  persist(); closeSheet('shTxn'); render();
+  if(txnType==='in'&&!wasOk&&isGoalDone(g)) setTimeout(()=>{celebrate();showToast(l.doneAnim);},200);
+  else showToast(txnType==='in'?l.depSuccess:l.withSuccess);
+}
+
+// ===== DELETE TRANSACTION =====
+function deleteTxn(tId) {
+  const tIdx = txns.findIndex(t => t.id === tId);
+  if (tIdx < 0) return;
+  const t = txns[tIdx];
+  const g = goals.find(x => x.id === t.goalId);
+  const l = TRANSLATIONS[prefs.lang] || TRANSLATIONS.lo;
+  
+  if (confirm(l.delTxnConfirm)) {
+    if (g) {
+      if (t.type === 'in') {
+        if (t.cur === 'KIP') g.savedKip = Math.max(0, g.savedKip - t.amount);
+        else g.savedBaht = Math.max(0, g.savedBaht - t.amount);
+      } else { // 'out'
+        if (t.cur === 'KIP') g.savedKip += t.amount;
+        else g.savedBaht += t.amount;
+      }
+    }
+    txns.splice(tIdx, 1);
+    persist();
+    render();
+    showToast(l.delSuccess);
+  }
+}
+
+// ===== DELETE GOAL =====
+function openDelete(idx){
+  delIdx=idx; const g=goals[idx];
+  const l = TRANSLATIONS[prefs.lang] || TRANSLATIONS.lo;
+  document.getElementById('delIcon').innerHTML=getGoalIconHtml(g);
+  document.getElementById('delName').textContent=g.name;
+  let s=''; if(g.savedKip) s+=`₭${g.savedKip.toLocaleString('en')} `; if(g.savedBaht) s+=`฿${g.savedBaht.toLocaleString('en')}`;
+  document.getElementById('delSaved').textContent=s?l.savedText+s.trim():l.notSavedYet;
+  openSheet('shDel');
+}
+function confirmDelete(){
+  const g=goals[delIdx]; txns=txns.filter(t=>t.goalId!==g.id); goals.splice(delIdx,1);
+  const l = TRANSLATIONS[prefs.lang] || TRANSLATIONS.lo;
+  persist(); closeSheet('shDel'); render(); showToast(l.delSuccess);
+}
+
+// ===== HELPERS =====
+function isGoalDone(g){return (!g.targetKip||g.savedKip>=g.targetKip)&&(!g.targetBaht||g.savedBaht>=g.targetBaht);}
+
+// ===== TIME GREETING MECHANISM =====
+function triggerGreeting() {
+  const hour = new Date().getHours();
+  const l = TRANSLATIONS[prefs.lang] || TRANSLATIONS.lo;
+  let text = l.goodMorning;
+  let icon = "🌅";
+  
+  if (hour >= 5 && hour < 12) {
+    text = l.goodMorning; icon = "🌅";
+  } else if (hour >= 12 && hour < 17) {
+    text = l.goodAfternoon; icon = "☀️";
+  } else if (hour >= 17 && hour < 21) {
+    text = l.goodEvening; icon = "🌆";
+  } else {
+    text = l.goodNight; icon = "🌙";
+  }
+  
+  const pop = document.getElementById('greetPopup');
+  document.getElementById('greetIcon').textContent = icon;
+  document.getElementById('greetText').textContent = text;
+  
+  setTimeout(() => {
+    pop.classList.add('show');
+    setTimeout(() => {
+      pop.classList.remove('show');
+    }, 3000);
+  }, 400);
+}
+
+// ===== RENDER =====
+function render(){renderSummary();renderGoals();}
+function renderSummary(){
+  document.getElementById('sumKip').textContent=goals.reduce((s,g)=>s+g.savedKip,0).toLocaleString('en');
+  document.getElementById('sumBaht').textContent=goals.reduce((s,g)=>s+g.savedBaht,0).toLocaleString('en');
+  document.getElementById('statGoals').textContent=goals.length;
+  document.getElementById('statDone').textContent=goals.filter(g=>isGoalDone(g)).length;
+}
+function renderGoals(){
+  const el=document.getElementById('goalList');
+  const l = TRANSLATIONS[prefs.lang] || TRANSLATIONS.lo;
+  if(!goals.length){
+    el.innerHTML=`<div class="empty"><div class="empty-pig">🐷</div><div class="empty-title">${l.noGoals}</div><div class="empty-sub">${l.clickFab}</div></div>`;
+    return;
+  }
+  el.innerHTML=goals.map((g,i)=>{
+    const done=isGoalDone(g);
+    const kPct=g.targetKip?Math.min(100,Math.round(g.savedKip/g.targetKip*100)):(g.savedKip?100:0);
+    const bPct=g.targetBaht?Math.min(100,Math.round(g.savedBaht/g.targetBaht*100)):(g.savedBaht?100:0);
+    let pts=0,tot=0;
+    if(g.targetKip){pts++;tot+=kPct;} if(g.targetBaht){pts++;tot+=bPct;}
+    const cpct=pts?Math.round(tot/pts):0;
+    const stripeC=done?'#0d9488':pctColor(cpct);
+    const fillS=done?'background:linear-gradient(90deg,#0d9488,#5ec2b7)':`background:${pctGradient(cpct)}`;
+    
+    // PACER CALCULATOR
+    let dateInfo='';
+    let paceStr='';
+    const kRem=g.targetKip?Math.max(0,g.targetKip-g.savedKip):0;
+    const bRem=g.targetBaht?Math.max(0,g.targetBaht-g.savedBaht):0;
+    
+    if(g.date){
+      const tDate = new Date(g.date);
+      tDate.setHours(23,59,59,999);
+      const diff=Math.ceil((tDate-new Date())/86400000);
+      dateInfo=diff>0?` • ${l.leftDays.replace('{d}', diff)}`:diff===0?` • ${l.today}`:` • ${l.overDate}`;
+      
+      // Calculate daily pace if not done and days are left
+      if(!done && diff > 0 && (kRem > 0 || bRem > 0)) {
+        const pArr = [];
+        if(kRem > 0) pArr.push(`₭${Math.ceil(kRem / diff).toLocaleString('en')}`);
+        if(bRem > 0) pArr.push(`฿${Math.ceil(bRem / diff).toLocaleString('en')}`);
+        if(pArr.length) paceStr = `<div class="goal-pace">${l.dailyPace}${pArr.join(' + ')}</div>`;
+      }
+    }
+    
+    let remStr='';
+    if(!done){const p2=[];if(kRem>0)p2.push(`₭${kRem.toLocaleString('en')}`);if(bRem>0)p2.push(`฿${bRem.toLocaleString('en')}`);if(p2.length)remStr=l.remText+p2.join(' + ');}
+    
+    return `
+    <div class="goal-card ${done?'done':''}" style="animation-delay:${i*.05}s">
+      <div class="goal-stripe" style="background:${stripeC}"></div>
+      <div class="goal-top">
+        <div class="goal-ico">${getGoalIconHtml(g)}</div>
+        <div class="goal-meta">
+          <div class="goal-name">${g.name}</div>
+          <div class="goal-sub">${g.targetKip?`₭${g.targetKip.toLocaleString('en')}`:''} ${g.targetKip&&g.targetBaht?'+':''} ${g.targetBaht?`฿${g.targetBaht.toLocaleString('en')}`:''} ${dateInfo}</div>
+        </div>
+        <div class="gtop-acts">
+          ${done?`<div class="done-badge">${l.doneBadge}</div>`:''}
+          <div class="mini-btn" onclick="openEditGoal(${i})" title="ແກ້ໄຂ">✏️</div>
+          <div class="mini-btn" onclick="openDelete(${i})" title="ລຶບ" style="color:var(--red)">🗑</div>
+        </div>
+      </div>
+      <div class="dual-saved">
+        ${g.targetKip||g.savedKip?`<div class="csb kip"><div class="csb-lbl">${prefs.lang==='en'?'Kip ₭':'ກີບ ₭'}</div><div class="csb-val">₭${g.savedKip.toLocaleString('en')}</div>${g.targetKip?`<div class="csb-tgt">/ ₭${g.targetKip.toLocaleString('en')} (${kPct}%)</div>`:''}</div>`:''}
+        ${g.targetBaht||g.savedBaht?`<div class="csb baht"><div class="csb-lbl">${prefs.lang==='en'?'Baht ฿':'ບາດ ฿'}</div><div class="csb-val">฿${g.savedBaht.toLocaleString('en')}</div>${g.targetBaht?`<div class="csb-tgt">/ ฿${g.targetBaht.toLocaleString('en')} (${bPct}%)</div>`:''}</div>`:''}
+      </div>
+      <div class="prog-section">
+        <div class="prog-hdr">
+          <span class="prog-lbl">${done? l.doneBadge : remStr||l.progressText}</span>
+          <span class="prog-pct" style="color:${stripeC}">${cpct}%</span>
+        </div>
+        <div class="prog-track"><div class="prog-fill" style="width:${cpct}%;${fillS}"></div></div>
+        ${paceStr}
+      </div>
+      <div class="goal-actions">
+        <button class="action-btn btn-kip"  onclick="openTxn(${i},'in','KIP')">+ ₭ ${prefs.lang==='en'?'Kip':'ກີບ'}</button>
+        <button class="action-btn btn-baht" onclick="openTxn(${i},'in','THB')">+ ฿ ${prefs.lang==='en'?'Baht':'ບາດ'}</button>
+        <button class="action-btn btn-out"  onclick="openTxn(${i},'out')" style="flex:.7">− ${prefs.lang==='en'?'Out':'ຖອນ'}</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderHistory(){
+  const el=document.getElementById('historyList');
+  const l = TRANSLATIONS[prefs.lang] || TRANSLATIONS.lo;
+  if(!txns.length){el.innerHTML=`<div class="empty"><div class="empty-pig">📭</div><div class="empty-title">${l.noHist}</div></div>`;return;}
+  el.innerHTML=[...txns].reverse().map(t=>{
+    const g=goals.find(x=>x.id===t.goalId);
+    const isIn=t.type==='in',isK=t.cur==='KIP';
+    const sym=isK?'₭':'฿',cls=isIn?(isK?'ki':'bi'):'out';
+    const d=new Date(t.date);
+    const currentLoc = prefs.lang === 'en' ? 'en-US' : (prefs.lang === 'th' ? 'th-TH' : 'lo-LA');
+    const ds=d.toLocaleDateString(currentLoc,{day:'numeric',month:'short'})+' '+d.toLocaleTimeString(currentLoc,{hour:'2-digit',minute:'2-digit'});
+    const curLabel = isK ? (prefs.lang==='en'?'Kip':'ກີບ') : (prefs.lang==='en'?'Baht':'ບາດ');
+    
+    let iconContent = sym;
+    if(!isIn) iconContent = '−';
+    if(g && g.iconType === 'device' && g.imageBlob){
+      iconContent = `<img src="${g.imageBlob}" />`;
+    }
+    
+    return `<div class="history-item">
+      <div class="hist-ico ${cls}">${iconContent}</div>
+      <div class="hist-info"><div class="hist-name">${g?(g.iconType==='emoji'?g.emoji+' ':'')+g.name:l.deletedG}${t.note?' • '+t.note:''}</div><div class="hist-sub">${ds} • ${curLabel}</div></div>
+      <div class="hist-amt ${cls}">${isIn?'+':'-'}${sym}${t.amount.toLocaleString('en')}</div>
+      <button class="hist-del" onclick="deleteTxn(${t.id})" title="Delete">🗑️</button>
+    </div>`;
+  }).join('');
+}
+
+function celebrate(){
+  const wrap=document.getElementById('confettiWrap');
+  const cols=['#f4845f','#f7c948','#0d9488','#e74c3c','#27ae60','#8b5cf6','#3b82f6'];
+  for(let i=0;i<70;i++){
+    const c=document.createElement('div'); c.className='conf';
+    const w=5+Math.random()*9,h=5+Math.random()*9;
+    c.style.cssText=`left:${Math.random()*100}%;top:0;width:${w}px;height:${h}px;background:${cols[Math.floor(Math.random()*cols.length)]};border-radius:${Math.random()>.5?'50%':'2px'};animation-duration:${.8+Math.random()*1.4}s;animation-delay:${Math.random()*.6}s;`;
+    wrap.appendChild(c); setTimeout(()=>c.remove(),2800);
+  }
+}
+function showToast(msg){
+  const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+// ===== INTERACTION EVENTS (SCROLL HIDE/SHRINK) =====
+document.getElementById('scrollArea').addEventListener('scroll', function(e) {
+  const st = this.scrollTop;
+  const header = document.getElementById('appHeader');
+  const nav = document.getElementById('bottomNav');
+  
+  if (st > 40) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+  
+  if (st > lastScrollTop && st > 80) {
+    nav.classList.add('hide');
+  } else {
+    nav.classList.remove('hide');
+  }
+  lastScrollTop = st <= 0 ? 0 : st;
+});
+
+document.getElementById('fabBtn').onclick=openNewGoal;
+
+setTimeout(() => {
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('sel'));
+  const activeLangBtn = document.getElementById('lang_' + prefs.lang);
+  if(activeLangBtn) activeLangBtn.classList.add('sel');
+}, 50);
+
+applyTheme(); renderThemeGrid(); renderBgGrid(); render();
+triggerGreeting();
+
+// ===== SPLASH SCREEN =====
+setTimeout(() => {
+  const splash = document.getElementById('splashScreen');
+  if (splash) splash.classList.add('hide');
+}, 2500);
+</script>
+</body>
+</html>
